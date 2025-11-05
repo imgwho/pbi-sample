@@ -1,0 +1,338 @@
+📖 Tableau 到 Power BI 看板迁移指南（重构版）
+
+  🎯 核心理念：从"房子的建造方式"理解两种工具
+
+  类比：把看板比作一栋房子
+  - Tableau = 用预制模块快速搭建的房子
+  - Power BI = 用蓝图和零件组装的房子
+
+  ---
+  第一章：看板是如何"组装"起来的？
+
+  1.1 Tableau 的组装方式（TWB 文件结构）
+
+  📦 Superstore.twb（一个 XML 文件）
+  │
+  ├── 🗂️ 数据源定义
+  │   └── 指向 Excel 文件的连接
+  │
+  ├── 🎨 工作表（Worksheets）
+  │   ├── 销售地图
+  │   ├── 利润趋势图
+  │   └── KPI 卡片
+  │
+  └── 📊 仪表板（Dashboard）
+      └── "Profitability Overview"
+          └── 把上面的工作表拖进来，调整位置
+
+  关键特点：
+  - 一个文件包含所有内容：像一个打包好的 Word 文档
+  - 拖拽式布局：就像在 PPT 里摆放图片
+  - 自动智能处理：比如日期自动按月/年/季度分组
+
+  ---
+  1.2 Power BI 的组装方式（PBIP 项目结构）
+
+  📁 superstore dashboard.pbip（一个项目文件夹）
+  │
+  ├── 📂 SemanticModel（数据层）
+  │   ├── definition.pbism（项目配置）
+  │   └── definition/
+  │       └── tables/
+  │           └── Orders.tmdl（数据表定义，像 Excel 的结构说明书）
+  │               ├── 列：Order Date, Sales, Profit...
+  │               ├── 计算列：Order Year-Month
+  │               └── 度量值：Total Sales, Profit Ratio...
+  │
+  └── 📂 Report（展示层）
+      └── definition/
+          └── pages/
+              └── ProfitabilityOverview/
+                  ├── page.json（页面配置）
+                  └── visuals/（可视化组件文件夹）
+                      ├── CardSales/
+                      │   └── visual.json（销售卡片的蓝图）
+                      ├── AreaChartSegment/
+                      │   └── visual.json（面积图的蓝图）
+                      └── ...
+
+  关键特点：
+  - 分层架构：数据和展示分离（像建筑的地基和装修分开）
+  - 文件夹组织：每个组件一个独立文件夹
+  - 代码式定义：需要写配置文件（JSON/TMDL格式）
+
+  ---
+  1.3 核心差异对比表
+
+  | 维度    | Tableau (TWB) | Power BI (PBIP) | 类比              |
+  |-------|---------------|-----------------|-----------------|
+  | 文件组织  | 单个 XML 文件     | 多文件夹项目          | 一本书 vs 一个档案柜    |
+  | 数据定义  | 内嵌在 TWB 中     | 独立的 TMDL 文件     | 便签 vs 数据库       |
+  | 可视化定义 | 拖拽后自动保存       | 每个组件一个 JSON     | 拍照 vs 画建筑图纸     |
+  | 修改方式  | 在软件界面操作       | 可直接编辑代码文件       | GUI vs 手工艺      |
+  | 版本控制  | 困难（整个文件变化）    | 容易（只改变的文件）      | 改一页重印全书 vs 只换一页 |
+
+  ---
+  第二章：数据是如何"喂"给看板的？
+
+  2.1 Tableau 的数据处理方式
+
+  工作流程：
+  Excel 文件 → Tableau 读取 → 自动识别字段类型 → 拖拽使用
+
+  示例：
+  <!-- Tableau TWB 文件中的数据源定义 -->
+  <datasource>
+    <connection class='excel' filename='Sample - Superstore.xls'>
+      <relation name='Orders' table='[Orders$]' />
+    </connection>
+
+    <!-- Tableau 会自动生成字段 -->
+    <column name='Order Date' datatype='date' />
+    <column name='Sales' datatype='real' />
+  </datasource>
+
+  Tableau 的"智能"之处：
+  - 📅 日期自动分组：拖入 "Order Date" 后，自动提供"年/季度/月/日"选项
+  - 🧮 自动聚合：拖入 "Sales" 自动变成 SUM(Sales)
+  - 🎯 即时计算：写一个公式 [Profit] / [Sales]，马上能用
+
+  ---
+  2.2 Power BI 的数据处理方式
+
+  工作流程：
+  Excel 文件 → 导入 Power BI → 定义数据模型（TMDL）→ 创建度量值/计算列 → 在可视化中引用
+
+  示例：
+  /// Orders.tmdl 文件（数据表的"说明书"）
+
+  table Orders
+    // 基础列（从 Excel 导入）
+    column 'Order Date'
+      dataType: dateTime
+      formatString: yyyy-mm-dd
+
+    column Sales
+      dataType: decimal
+      formatString: \$#,0.00
+
+    // 手动创建的计算列（因为 Power BI 不会自动按月分组）
+    column 'Order Year-Month' = FORMAT(Orders[Order Date], "YYYY-MM")
+      dataType: string
+      dataCategory: Months
+
+    // 手动创建的度量值（聚合计算）
+    measure 'Total Sales' = SUM(Orders[Sales])
+      formatString: \$#,0.00
+
+    measure 'Profit Ratio' = DIVIDE([Total Profit], [Total Sales], 0)
+      formatString: 0.00%
+
+  Power BI 的"显式"要求：
+  - 📅 必须手动创建月份列：不会自动提供月度分组
+  - 🧮 明确区分度量值和列：
+    - 列（Column）= 每行数据都有值
+    - 度量值（Measure）= 聚合计算的结果
+  - 🎯 先定义，后使用：必须在数据模型中定义好，才能在可视化中引用
+
+  ---
+  2.3 实际案例对比：如何实现"按月显示销售额"
+
+  Tableau 的做法（2步）：
+  1. 拖动 "Order Date" 到列
+  2. 右键选择 "月" → 完成 ✅
+
+  Power BI 的做法（4步）：
+  1. 打开 Orders.tmdl 文件
+  2. 添加计算列：
+     column 'Order Year-Month' = FORMAT([Order Date], "YYYY-MM")
+  3. 保存数据模型
+  4. 在面积图的 visual.json 中引用：
+     "Property": "Order Year-Month"  ✅
+
+  为什么 Power BI 这么"麻烦"？
+  - ✅ 优点：数据定义更清晰，团队协作更规范
+  - ❌ 缺点：学习曲线陡峭，迁移时需要重新定义
+
+  ---
+  第三章：看板的布局是如何"画"出来的？
+
+  3.1 Tableau 的布局控制（可视化方式）
+
+  操作方式：
+  在 Tableau Desktop 中：
+  1. 创建一个 Dashboard
+  2. 从左侧拖拽工作表到画布
+  3. 调整大小和位置（像拼图）
+  4. 保存 → 自动写入 TWB 文件
+
+  TWB 文件中的布局代码（自动生成）：
+  <dashboard>
+    <zones>
+      <!-- KPI 卡片的位置 -->
+      <zone x='10' y='60' h='70' w='145' name='Sales Card' />
+
+      <!-- 地图的位置 -->
+      <zone x='10' y='140' h='240' w='850' name='Map' />
+    </zones>
+  </dashboard>
+
+  特点：
+  - 🖱️ 所见即所得：拖到哪就是哪
+  - 📏 相对定位：可以设置"浮动"或"平铺"布局
+  - 🔄 实时预览：调整立即看到效果
+
+  ---
+  3.2 Power BI 的布局控制（代码方式）
+
+  操作方式（两种）：
+
+  方法 1：在 Power BI Desktop 中拖拽（推荐）
+  1. 打开 .pbip 项目
+  2. 在 Power BI Desktop 中拖拽组件
+  3. 保存 → 自动生成 visual.json
+
+  方法 2：直接编写代码（高级/迁移时使用）
+  1. 创建文件夹：visuals/CardSales/
+  2. 编写 visual.json：
+
+  {
+    "name": "CardSales",
+    "position": {
+      "x": 10,      // 距离左边缘 10 像素
+      "y": 60,      // 距离顶部 60 像素
+      "z": 1001,    // 层次（数字越大越靠前）
+      "width": 145,  // 宽度
+      "height": 70   // 高度
+    },
+    "visual": {
+      "visualType": "card",
+      "query": {
+        "queryState": {
+          "Values": {
+            "projections": [
+              {
+                "field": {
+                  "Column": {
+                    "Expression": { "SourceRef": { "Entity": "Orders" } },
+                    "Property": "Total Sales"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+
+  特点：
+  - 📐 绝对定位：必须指定精确的 x, y 坐标
+  - 📝 代码定义：每个组件的位置、大小、数据绑定都在 JSON 中
+  - 🔍 需要参考：很难凭空写出，需要参考现有示例（如 Retail Analysis Sample）
+
+  ---
+  3.3 布局迁移的实际挑战
+
+  案例：7 个 KPI 卡片的横排布局
+
+  Tableau 中：
+  拖拽 7 次 → 自动排列 → 完成
+
+  Power BI 中（手动迁移）：
+  需要创建：
+  - 7 个文件夹：CardSales, CardProfit, CardProfitRatio...
+  - 7 个 visual.json 文件
+  - 计算每个卡片的精确坐标：
+    Card 1: x=10
+    Card 2: x=165  (10 + 145 + 10间距)
+    Card 3: x=320  (165 + 145 + 10间距)
+    ...
+
+  坐标计算图示：
+  ┌────────┬────────┬────────┬────────┐
+  │ Card 1 │ Card 2 │ Card 3 │ Card 4 │
+  │ x=10   │ x=165  │ x=320  │ x=475  │
+  │ w=145  │ w=145  │ w=145  │ w=145  │
+  └────────┴────────┴────────┴────────┘
+    ←10→     ←10→     ←10→
+    间距      间距      间距
+
+  ---
+  第四章：迁移的本质是什么？
+
+  4.1 三个核心转换
+
+  ┌─────────────────┐         ┌──────────────────┐
+  │   Tableau TWB   │         │   Power BI PBIP  │
+  ├─────────────────┤         ├──────────────────┤
+  │                 │         │                  │
+  │ 1️⃣ 单文件结构   │  ───▶   │ 1️⃣ 多文件夹结构   │
+  │   └ 一个 XML     │         │   └ JSON + TMDL  │
+  │                 │         │                  │
+  │ 2️⃣ 自动智能处理 │  ───▶   │ 2️⃣ 显式定义模型   │
+  │   └ 拖拽即用     │         │   └ 先写后用      │
+  │                 │         │                  │
+  │ 3️⃣ 可视化布局   │  ───▶   │ 3️⃣ 代码式布局     │
+  │   └ 拖拽定位     │         │   └ 坐标计算      │
+  │                 │         │                  │
+  └─────────────────┘         └──────────────────┘
+
+  4.2 工作量对比
+
+  | 任务         | Tableau  | Power BI      | 增加的工作量 |
+  |------------|----------|---------------|--------|
+  | 连接数据源      | 1 分钟     | 1 分钟          | 无      |
+  | 创建月度字段     | 0（自动）    | 5 分钟（写代码）     | ⬆️     |
+  | 创建 7 个 KPI | 7 分钟（拖拽） | 30 分钟（写 JSON） | ⬆️⬆️⬆️ |
+  | 调整布局       | 5 分钟（拖拽） | 15 分钟（算坐标）    | ⬆️⬆️   |
+  | 总计         | ~15 分钟   | ~50 分钟        | 3-4 倍  |
+
+  ---
+  第五章：为什么需要这份指南？
+
+  5.1 三个关键认知
+
+  1. 不能"复制粘贴"
+    - Tableau 的 TWB 和 Power BI 的 PBIP 是完全不同的格式
+    - 必须"翻译"每个组件
+  2. 必须有"参考答案"
+    - Power BI 的 visual.json 格式复杂，很难凭空写出
+    - 需要找一个类似的现有示例（如 Retail Analysis Sample）
+    - 对照着改，而不是从零开始写
+  3. 数据模型是核心
+    - 80% 的迁移工作在数据层（TMDL）
+    - 可视化层只是"展示"，数据层才是"基础"
+
+  ---
+  附录：关键术语对照表
+
+  | Tableau 术语       | Power BI 术语       | 说明    |
+  |------------------|-------------------|-------|
+  | Workbook (.twb)  | Report (.pbip)    | 项目文件  |
+  | Data Source      | Semantic Model    | 数据源定义 |
+  | Worksheet        | Visual            | 单个图表  |
+  | Dashboard        | Page              | 看板页面  |
+  | Calculated Field | Measure / Column  | 计算字段  |
+  | Dimension        | Column            | 维度字段  |
+  | Measure          | Measure           | 聚合度量  |
+  | Filter           | Slicer            | 筛选器   |
+  | Parameter        | What-if Parameter | 参数    |
+
+  ---
+  总结：记住三句话
+
+  1. Tableau = 拖拽式，Power BI = 代码式
+  2. 迁移的核心是"数据模型重建"，而非"界面复制"
+  3. 必须有参考示例，不能凭空创造
+
+  ---
+  这个结构是否更清晰？我重点用了：
+  - 🏠 类比（房子、书、档案柜）
+  - 📊 对比表格
+  - 🎯 实际案例
+  - 📐 可视化图示
+
+  避免了深入的技术细节，让非技术人员也能理解"为什么会这样"。
+
+  你觉得这个结构如何？需要调整哪些部分？

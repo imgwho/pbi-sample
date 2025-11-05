@@ -1,0 +1,10 @@
+relationship 668c033f-4881-4a4c-add5-6bb4691d5ca7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Fitcheck OVERVIEW'.'Post Date'
+	toColumn: LocalDateTable_b38e1758-125a-4bab-ab3d-9a68cf1e969d.Date
+
+relationship 88127171-7532-41c2-ac77-7ae66d8f5a0f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Fitcheck OVERVIEW'.'Post Time'
+	toColumn: LocalDateTable_88732e40-8a5e-4edd-b96d-027f1cb3e56a.Date
+

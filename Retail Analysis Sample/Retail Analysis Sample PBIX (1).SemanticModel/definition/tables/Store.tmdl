@@ -1,0 +1,263 @@
+table Store
+	lineageTag: c0eb41b6-083a-46ca-9f80-22bbc9af33f0
+
+	measure 'Average Selling Area Size' = AVERAGE([SellingAreaSize])
+		formatString: #,0
+		lineageTag: 5176497f-1cfd-4264-ad32-588066faefb0
+
+	measure 'New Stores' = CALCULATE(COUNTA([Store Type]), FILTER(ALL(Store), [Store Type]="New Store"))
+		lineageTag: 9df63744-03a0-4c71-a700-82a0bdc764de
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'New Stores Target' = 14
+		lineageTag: ba84856c-bd6c-405e-b07e-deface29c1fa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Stores' = COUNTA([StoreNumberName])
+		formatString: 0
+		lineageTag: ecbc666d-626f-4e02-875c-9a585786bdf3
+
+	measure 'Open Store Count' = COUNTA([OpenDate])
+		formatString: 0
+		lineageTag: f93b364d-e73e-4fff-bf77-5c104ad4f801
+
+	measure 'Count of OpenDate' = COUNTA('Store'[OpenDate])
+		lineageTag: ddcec2e9-df50-480d-8e4a-c6470c25584d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LocationID
+		dataType: int64
+		isHidden
+		isKey
+		lineageTag: 00ae43f8-d64d-48f8-b015-fdbc2d3744f5
+		summarizeBy: none
+		sourceColumn: LocationID
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'City Name'
+		dataType: string
+		isHidden
+		lineageTag: 18bb3ce7-4477-4173-bb13-7931427cf340
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: City Name
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Territory
+		dataType: string
+		lineageTag: e3373455-dbc8-4455-b82e-121923f9d7e6
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: Territory
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column PostalCode
+		dataType: string
+		lineageTag: 063d56d9-3458-42e9-a3a0-c0a13c9192c4
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: PostalCode
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column OpenDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ee6cf354-853f-47e9-9c33-148f0769b2bc
+		summarizeBy: none
+		sourceColumn: OpenDate
+
+		variation Variation
+			isDefault
+			relationship: 74e52eb9-ac73-4b07-bb52-1b4cca072b32
+			defaultHierarchy: LocalDateTable_0eafa36c-5fc2-4b6f-84df-278a77695bc4.'Date Hierarchy'
+
+		annotation DataTypeAtRefresh = DateTime#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+	column SellingAreaSize
+		dataType: int64
+		lineageTag: c7f5c35c-6b6e-4d49-abb4-a36bde37fce3
+		summarizeBy: sum
+		sourceColumn: SellingAreaSize
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DistrictName
+		dataType: string
+		isHidden
+		lineageTag: 04e7b2bc-54ed-4ae4-afda-c7a9ac738273
+		summarizeBy: none
+		sourceColumn: DistrictName
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Name
+		dataType: string
+		lineageTag: bf44b0ac-8a97-4e1d-9001-e7494202b5dc
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column StoreNumberName
+		dataType: string
+		lineageTag: a57a7fd1-319a-4744-bb9c-19f5594ad411
+		tableDetailPosition: 0
+		isDefaultLabel
+		summarizeBy: none
+		sourceColumn: StoreNumberName
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column StoreNumber
+		dataType: int64
+		lineageTag: fae60139-b189-4b00-8ab7-ae28e4fea0f5
+		summarizeBy: sum
+		sourceColumn: StoreNumber
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column City = [City Name] & ", "&[Territory]
+		lineageTag: c8044c98-0bfe-4cab-a752-d1efd064b183
+		dataCategory: City
+		summarizeBy: none
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Chain
+		dataType: string
+		lineageTag: 6ec37ba5-e7a0-4ff2-b237-97ca74a851b6
+		summarizeBy: none
+		sourceColumn: Chain
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+	column DM
+		dataType: string
+		lineageTag: c79327ef-74d3-46e9-992f-fec5e47434a0
+		summarizeBy: none
+		sourceColumn: DM
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+	column DM_Pic
+		dataType: string
+		lineageTag: 7f879310-39ab-4ff7-90d8-77c70da62e31
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: DM_Pic
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+	column DistrictID
+		dataType: int64
+		lineageTag: c0d59ae3-8b31-42b2-b701-fb48956f4b5b
+		summarizeBy: none
+		sourceColumn: DistrictID
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+	column 'Open Year' = YEAR([OpenDate])
+		lineageTag: 83cb5324-589a-49fd-a9bd-494abec855b1
+		summarizeBy: sum
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Store Type' = IF([Open Year]=2014, "New Store", "Same Store")
+		lineageTag: 09b0f2c7-8c2b-4d46-88fd-7d52a05918da
+		summarizeBy: none
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Open Month No' = MONTH([OpenDate])
+		lineageTag: 9ef96861-f5a0-4649-b7f9-526ac30cbc45
+		summarizeBy: sum
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Open Month' = FORMAT([OpenDate], "MMM")
+		lineageTag: ae2cf7d7-7264-42de-8c6e-3d8974c9e2cf
+		summarizeBy: none
+		sortByColumn: 'Open Month No'
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition Store = m
+		source =
+				let
+				    Source = Sql.Database(".", "RetailBIDW", [Query="select * from ip.retail.StoreDim"]),
+				    #"Renamed Columns" = Table.RenameColumns(Source, {{"LocationID", "LocationID"}, {"City", "City Name"}, {"Territory", "Territory"}, {"PostalCode", "PostalCode"}, {"OpenDate", "OpenDate"}, {"SellingAreaSize", "SellingAreaSize"}, {"DistrictName", "DistrictName"}, {"Name", "Name"}, {"StoreNumberName", "StoreNumberName"}, {"StoreNumber", "StoreNumber"}, {"Chain", "Chain"}, {"DM", "DM"}, {"DM_Pic", "DM_Pic"}, {"DistrictID", "DistrictID"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns", {{"LocationID", Int64.Type}, {"City Name", type text}, {"Territory", type text}, {"PostalCode", type text}, {"OpenDate", type datetime}, {"SellingAreaSize", Int64.Type}, {"DistrictName", type text}, {"Name", type text}, {"StoreNumberName", type text}, {"StoreNumber", Int64.Type}, {"Chain", type text}, {"DM", type text}, {"DM_Pic", type text}, {"DistrictID", Int64.Type}})
+				in
+				    #"Changed Type"
+

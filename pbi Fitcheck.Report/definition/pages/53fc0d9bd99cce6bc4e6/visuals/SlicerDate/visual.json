@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "SlicerDate",
+  "position": {
+    "x": 520,
+    "y": 10,
+    "z": 12000,
+    "height": 50,
+    "width": 350
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fitcheck OVERVIEW"
+                    }
+                  },
+                  "Property": "Post Date"
+                }
+              },
+              "queryRef": "Fitcheck OVERVIEW.Post Date",
+              "active": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}

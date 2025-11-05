@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Retail Analysis Sample PBIX (1)"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "35a8ace1-a7ec-4003-9337-87169704b123"
+  }
+}

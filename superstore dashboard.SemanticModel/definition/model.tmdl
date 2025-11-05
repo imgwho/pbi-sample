@@ -1,0 +1,21 @@
+model Model
+	culture: zh-CN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: zh-CN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Orders"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Orders
+ref table DateTableTemplate_64e60cea-4f5d-493c-b11a-308be93b7939
+ref table LocalDateTable_a6b2f022-b445-4552-8d61-62365fe579ad
+ref table LocalDateTable_88c0a336-da01-4bd2-b2dd-c947bc5d48aa
+
+ref cultureInfo zh-CN
+

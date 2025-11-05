@@ -1,0 +1,35 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "DescriptionText",
+  "position": {
+    "x": 10.536334405144695,
+    "y": 174.60211299954065,
+    "z": 1000,
+    "height": 25.588240698208544,
+    "width": 859.46384933394575
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Performance = Overall Success (ROI, Revenue, Conversions) | Efficiency = Cost Effectiveness (CPC, CPM, Spend)",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "10pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,353 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "BubbleChart",
+  "position": {
+    "x": 645,
+    "y": 430,
+    "z": 8000,
+    "height": 220,
+    "width": 625
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Details": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fitcheck OVERVIEW"
+                    }
+                  },
+                  "Property": "Platform"
+                }
+              },
+              "queryRef": "Fitcheck OVERVIEW.Platform"
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fitcheck OVERVIEW"
+                    }
+                  },
+                  "Property": "Platform"
+                }
+              },
+              "queryRef": "Fitcheck OVERVIEW.Platform"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fitcheck OVERVIEW"
+                    }
+                  },
+                  "Property": "Total Conversions"
+                }
+              },
+              "queryRef": "Fitcheck OVERVIEW.Total Conversions",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fitcheck OVERVIEW"
+                    }
+                  },
+                  "Property": "ROI"
+                }
+              },
+              "queryRef": "Fitcheck OVERVIEW.ROI"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "dataPoint": [
+        {
+          "properties": {
+            "showAllDataPoints": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#729EAE'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Fitcheck OVERVIEW"
+                          }
+                        },
+                        "Property": "Platform"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'LinkedIn'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#B39DBD'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Fitcheck OVERVIEW"
+                          }
+                        },
+                        "Property": "Platform"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Instagram'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#7B9CB3'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Fitcheck OVERVIEW"
+                          }
+                        },
+                        "Property": "Platform"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Facebook'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#6B8693'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Fitcheck OVERVIEW"
+                          }
+                        },
+                        "Property": "Platform"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'X'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#7CB89D'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Fitcheck OVERVIEW"
+                          }
+                        },
+                        "Property": "Platform"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'TikTok'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "3ee8b1ec21e8a729f644",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Fitcheck OVERVIEW"
+              }
+            },
+            "Property": "Total Conversions"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fb7079ed11b9b02e35d5",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Fitcheck OVERVIEW"
+              }
+            },
+            "Property": "ROI"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6e02a5d6f370dc6b6833",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Fitcheck OVERVIEW"
+              }
+            },
+            "Property": "Platform"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

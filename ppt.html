@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Magic: Tableau to Power BI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/white.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/monokai.min.css">
+
+  <style>
+    /* 基础样式 */
+    .reveal {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* 强制取消默认的大写锁定，让其更自然 */
+    .reveal h1,
+    .reveal h2,
+    .reveal h3,
+    .reveal h4 {
+      text-transform: none;
+      word-wrap: break-word;
+    }
+
+    /* 左右分栏布局 */
+    .side-by-side {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .side-by-side .column {
+      flex: 1;
+    }
+
+    .side-by-side img {
+      max-width: 100%;
+      border: 2px solid #ddd;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    /* AI Prompt 提示框样式 */
+    .prompt {
+      display: block;
+      background-color: #f5f5f5;
+      border-left: 5px solid #4285F4;
+      /* Google Blue */
+      padding: 15px 20px;
+      font-style: italic;
+      text-align: left;
+      margin: 20px auto;
+      width: 90%;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9em;
+    }
+
+    /* 流程图样式 */
+    .flow-diagram {
+      font-size: 1.5em;
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      font-weight: 600;
+    }
+
+    .flow-diagram span {
+      color: #aaa;
+    }
+
+    .flow-diagram strong {
+      color: #E67E22;
+      /* 突出 AI */
+      padding: 10px 15px;
+      border: 2px solid #E67E22;
+      border-radius: 8px;
+    }
+
+    /* 代码块样式 */
+    .reveal pre code {
+      max-height: 450px !important;
+      /* 限制代码块高度 */
+      border-radius: 8px;
+      font-size: 0.8em;
+    }
+
+    /* 强调 "BOOM!" */
+    .boom {
+      font-size: 3em !important;
+      color: #D90429;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 价值点列表 */
+    .value-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .value-list li {
+      font-size: 1.2em;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .value-list li::before {
+      content: '✅';
+      /* 用 Emoji 替代 bullet */
+      font-size: 1.5em;
+      margin-right: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <h1>AI Magic: Translating BI Dashboards</h1>
+        <h3 style="margin-top: 20px;">From Tableau to Power BI... in Minutes, Not Weeks.</h3>
+        <p style="margin-top: 50px;">Cooper wenhua</p>
+        <p><small>"AI 魔法师"</small></p>
+      </section>
+
+      <section>
+        <h2>Before vs. After (The Hook)</h2>
+        <div class="side-by-side">
+          <div class="column">
+            <h3>Tableau</h3>
+            <img src="https://via.placeholder.com/600x400.png?text=Tableau+Screenshot" alt="Tableau Dashboard">
+          </div>
+          <div class="column">
+            <h3>Power BI</h3>
+            <img src="https://via.placeholder.com/600x400.png?text=Power+BI+Screenshot" alt="Power BI Dashboard">
+          </div>
+        </div>
+        <h3 class="fragment" style="margin-top: 30px;">
+          100% Identical. 0% Manual Rebuilding.
+          <strong style="color: #D90429;">How?</strong>
+        </h3>
+      </section>
+
+      <section>
+        <h2>The "Why": Vendor Lock-in</h2>
+        <img src="https://via.placeholder.com/300x300.png?text=Vendor+Lock" alt="Lock"
+          style="max-height: 250px; border: none; box-shadow: none; background: none;">
+        <ul style="list-style: none;">
+          <li class="fragment">Our business logic is trapped.</li>
+          <li class="fragment">Manual migration is slow, expensive, and... <strong>boring</strong>.</li>
+          <li class="fragment" style="margin-top: 20px; color: #E67E22;">
+            <em>"Absolutely should make Tableau terrified of customer churn"</em><br>
+            <small>- Patrick Therriault</small>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>The "Key": The AI "Converter"</h2>
+        <div class="flow-diagram">
+          <span>Tableau</span>
+          <span>&rarr;</span>
+          <strong>AI "Translator"</strong>
+          <span>&rarr;</span>
+          <span>Power BI</span>
+        </div>
+        <ul style="list-style: none; padding-left: 0;">
+          <li class="fragment">We don't "migrate". We <strong>"translate"</strong>.</li>
+          <li class="fragment">Today: Tableau &rarr; Power BI</li>
+          <li class="fragment">Tomorrow: PBI &rarr; ThoughtSpot? (Platform Freedom)</li>
+        </ul>
+        <p class="fragment" style="margin-top: 30px;">My Assistants: <strong>Gemini & Claude Code</strong></p>
+      </section>
+
+      <section>
+        <h2>The "Magician's" Workbench</h2>
+        <ul style="font-size: 1.2em; line-height: 1.6; list-style: none;">
+          <li class="fragment"><strong>Blueprint:</strong> Tableau .twb (XML)</li>
+          <li class="fragment"><strong>Assistants:</strong> Gemini & Claude</li>
+          <li class="fragment"><strong>Spellbook:</strong> VS Code (JSON & TMDL)</li>
+          <li class="fragment"><strong>Product:</strong> Power BI Desktop</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Magic Step 1: Translating "Data Model"</h2>
+        <p style="text-align: left; width: 90%; margin: 10px auto;"><strong>Tableau Calculation (XML):</strong></p>
+        <pre><code class="language-sql" data-trim>
+sum([Profit])/sum([Sales])
+                </code></pre>
+        <p class="prompt fragment">"AI, please translate this Tableau calculation to a Power BI DAX measure."</p>
+        <p class="fragment" style="text-align: left; width: 90%; margin: 10px auto;"><strong>AI-Generated DAX
+            (TMDL):</strong></p>
+        <pre class="fragment"><code class="language-dax" data-trim data-line-numbers="1-2">
+measure 'Profit Ratio' = 
+    DIVIDE(SUM(Orders[Profit]), SUM(Orders[Sales]), 0)
+                </code></pre>
+        <h3 class="fragment">Easy. But... what about the *hard* stuff?</h3>
+      </section>
+
+      <section>
+        <h2>Magic Step 2: Conquering "LOD"</h2>
+        <p style="text-align: left; width: 90%; margin: 10px auto;"><strong>Tableau LOD (XML):</strong></p>
+        <pre><code class="language-sql" data-trim>
+{FIXED [Order ID]:SUM([Profit])}>0
+                </code></pre>
+        <p class="prompt fragment">"OK, AI. Now translate *this* Tableau LOD expression."</p>
+        <p class="fragment" style="text-align: left; width: 90%; margin: 10px auto;"><strong>AI-Generated DAX
+            (TMDL):</strong></p>
+        <pre class="fragment"><code class="language-dax" data-trim data-line-numbers="2-5">
+measure 'Order Profitable' =
+    VAR OrderProfit = CALCULATE(
+        SUM(Orders[Profit]),
+        ALLEXCEPT(Orders, Orders[Order ID])
+    )
+    RETURN IF(OrderProfit > 0, "Profitable", "Unprofitable")
+                </code></pre>
+        <h3 class="fragment">Game-Changer. AI understands the *logic*.</h3>
+      </section>
+
+      <section>
+        <h2>Magic Step 3: Translating "Layout"</h2>
+        <p style="text-align: left; width: 90%; margin: 10px auto;"><strong>Tableau Layout (XML):</strong></p>
+        <pre><code class="language-xml" data-trim>
+<zone h='6526' id='38' w='98858' x='571' y='667'>
+...
+</zone>
+                </code></pre>
+        <p class="prompt fragment">"Translate this Tableau layout (0-100000) to Power BI pixel coordinates (1280x720)."
+        </p>
+        <p class="fragment" style="text-align: left; width: 90%; margin: 10px auto;"><strong>AI-Generated Layout
+            (JSON):</strong></p>
+        <pre class="fragment"><code class="language-json" data-trim data-line-numbers="2-6">
+"position": {
+    "x": 7,
+    "y": 5,
+    "width": 1265,
+    "height": 47
+}
+                </code></pre>
+        <h3 class="fragment">AI handles the boring math.</h3>
+      </section>
+
+      <section>
+        <h2>Ultimate Magic: Creating a New KPI</h2>
+        <ul style="list-style: none; padding-left: 0; line-height: 1.8; font-size: 1.2em;">
+          <li class="fragment"><strong>ME:</strong> "I need a new KPI: Avg. Sales per Order."</li>
+          <li class="fragment"><strong>AI:</strong> <em>[Generates new TMDL & JSON...]</em></li>
+          <li class="fragment"><strong>ME:</strong> <em>[Copy... Paste... Save...] (Fast-forward ⏩)</em></li>
+          <li class="fragment"><strong>PBI:</strong> <em>[Reloading...]</em></li>
+          <li class="fragment boom"><strong>Boom! 💥</strong></li>
+          <li class="fragment">(New KPI appears instantly)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>The "Magic's" Value</h2>
+        <ul class="value-list">
+          <li class="fragment">
+            <strong>Speed:</strong> Weeks &rarr; Hours
+          </li>
+          <li class="fragment">
+            <strong>Freedom:</strong> Breaking "Vendor Lock-in"
+          </li>
+          <li class="fragment">
+            <strong>Fun:</strong> Developers &rarr; AI Directors
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Thank You</h1>
+        <h3 style="margin-top: 50px;">Cooper wenhua</h3>
+        <p>(您的联系方式 / LinkedIn)</p>
+      </section>
+
+      <section>
+        <h1>Q&A</h1>
+        <h3 style="margin-top: 50px;">(I will answer in Chinese, MS Teams provides live translation.)</h3>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/highlight/highlight.min.js"></script>
+
+  <script>
+    Reveal.initialize({
+      hash: true, // 启用 URL hash
+      controls: true, // 显示控制箭头
+      progress: true, // 显示进度条
+      center: true, // 垂直居中
+
+      // 激活插件
+      plugins: [RevealHighlight]
+    });
+  </script>
+</body>
+
+</html>

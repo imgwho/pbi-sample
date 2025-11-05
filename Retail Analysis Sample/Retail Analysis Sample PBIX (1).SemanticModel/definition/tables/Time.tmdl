@@ -1,0 +1,83 @@
+table Time
+	lineageTag: a2745550-72d0-4fb1-9e07-6fde08c6578f
+	dataCategory: Time
+
+	column ReportingPeriodID
+		dataType: int64
+		isHidden
+		lineageTag: eafaaad9-5483-494c-92c5-a59f1057ee07
+		summarizeBy: none
+		sourceColumn: ReportingPeriodID
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Period
+		dataType: int64
+		lineageTag: 0ba010eb-c402-45f9-96c2-b9cc613ea980
+		summarizeBy: sum
+		sourceColumn: Period
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FiscalYear
+		dataType: int64
+		lineageTag: 41bddb43-3313-47e1-ae91-0913e1afe159
+		dataCategory: Year
+		summarizeBy: sum
+		sourceColumn: FiscalYear
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FiscalMonth
+		dataType: string
+		lineageTag: fa522c9d-e4bb-4903-bbe1-b4aa7a8a1b97
+		dataCategory: Month
+		summarizeBy: none
+		sourceColumn: FiscalMonth
+		sortByColumn: Period
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: dateTime
+		isKey
+		lineageTag: e8732efc-784a-4efa-907c-fbb3cd04de05
+		summarizeBy: none
+		sourceColumn: Month
+
+		variation Variation
+			isDefault
+			relationship: ffdea654-6956-479d-9b81-f720c4647966
+			defaultHierarchy: LocalDateTable_2403841f-d1ed-4123-bf26-4ba8066f16d8.'Date Hierarchy'
+
+		annotation DataTypeAtRefresh = DateTime#####not a type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition Time = m
+		source =
+				let
+				    Source = Sql.Database(".", "RetailBIDW", [Query="select distinct#(lf)concat(year(dateadd(year, 2, [BusinessDayDate] )),RIGHT('0'+cast(month(dateadd(year, 2, [BusinessDayDate] )) as varchar(2)), 2), RIGHT('0'+cast(day(dateadd(year, 2, [BusinessDayDate] )) as varchar(2)), 2) ) ReportingPeriodID, #(lf)  month(dateadd(year, 2, [BusinessDayDate] )) Period, #(lf)  left(DATENAME(month, dateadd(year, 2, [BusinessDayDate] )), 3) FiscalMonth, #(lf)  year(dateadd(year, 2, [BusinessDayDate] ) ) FiscalYear, #(lf)  dateadd(year, 2, [BusinessDayDate] ) [BusinessDayDate]#(lf)from [Time_Dimension]"]),
+				    #"Renamed Columns" = Table.RenameColumns(Source, {{"ReportingPeriodID", "ReportingPeriodID"}, {"Period", "Period"}, {"FiscalYear", "FiscalYear"}, {"FiscalMonth", "FiscalMonth"}, {"BusinessDayDate", "Month"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns", {{"ReportingPeriodID", Int64.Type}, {"Period", Int64.Type}, {"FiscalYear", Int64.Type}, {"FiscalMonth", type text}, {"Month", type datetime}})
+				in
+				    #"Changed Type"
+
+	annotation __PBI_LegacyCustomDateTable = true
+

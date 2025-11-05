@@ -1,0 +1,87 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 347.58908647356338,
+            "y": 396.82660938194414
+          },
+          "nodeIndex": "Sales",
+          "nodeLineageTag": "91cde90a-fc5d-40d1-905b-860bc49033d5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": -50
+          },
+          "nodeIndex": "District",
+          "nodeLineageTag": "8d3ac8bb-1f44-4b32-bd5e-1ba4857aa7f8",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 275.51797717837127,
+            "y": 748.35686102946647
+          },
+          "nodeIndex": "Item",
+          "nodeLineageTag": "c288924f-72e6-46c1-b123-ec0715cc6ba0",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 60.524825562961155,
+            "y": 248.05900582676543
+          },
+          "nodeIndex": "Store",
+          "nodeLineageTag": "c0eb41b6-083a-46ca-9f80-22bbc9af33f0",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 634.64077386346639,
+            "y": 317.26478264353426
+          },
+          "nodeIndex": "Time",
+          "nodeLineageTag": "a2745550-72d0-4fb1-9e07-6fde08c6578f",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "所有表",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "所有表",
+  "defaultDiagram": "所有表"
+}
