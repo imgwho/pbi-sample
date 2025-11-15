@@ -1,0 +1,8 @@
+{
+  "version": "4.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../pbi fitcheck ver2.0.SemanticModel"
+    }
+  }
+}

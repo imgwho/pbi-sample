@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "pbi fitcheck ver2.0"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "35122f9f-1498-45aa-8249-1543792e6931"
+  }
+}

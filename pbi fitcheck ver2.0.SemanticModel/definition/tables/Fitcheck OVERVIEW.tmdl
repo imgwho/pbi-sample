@@ -1,0 +1,276 @@
+table 'Fitcheck OVERVIEW'
+	lineageTag: a9b4661b-d1e6-401a-ab12-a4540b236d44
+
+	measure 'Total Revenue' = SUM('Fitcheck OVERVIEW'[Conversion Value Usd])
+		formatString: \$#,0.0,,"M";(\$#,0.0,,"M");\$#,0.0,,"M"
+		lineageTag: 6e5a3f1f-8c9e-4f7e-9a0a-8c9e4f7e9a0a
+
+	measure 'Total Conversions' = SUM('Fitcheck OVERVIEW'[Conversions])
+		formatString: #,0
+		lineageTag: 7f6b4f2f-9d0f-4f8f-0b1b-9d0f4f8f0b1b
+
+	measure ROI =
+			VAR TotalRevenue = SUM('Fitcheck OVERVIEW'[Conversion Value Usd])
+			VAR TotalSpend = SUM('Fitcheck OVERVIEW'[Spend Usd])
+			RETURN
+			IF(
+			    TotalSpend = 0,
+			    BLANK(),
+			    DIVIDE(TotalRevenue - TotalSpend, TotalSpend) * 100
+			)
+		formatString: #,0"%";-#,0"%";#,0"%"
+		lineageTag: 8g7c5g3g-0e1g-5g9g-1c2c-0e1g5g9g1c2c
+
+	measure 'Cost per Conversion' =
+			VAR TotalSpend = SUM('Fitcheck OVERVIEW'[Spend Usd])
+			VAR TotalConversions = SUM('Fitcheck OVERVIEW'[Conversions])
+			RETURN
+			IF(
+			    TotalConversions = 0,
+			    BLANK(),
+			    DIVIDE(TotalSpend, TotalConversions)
+			)
+		formatString: \$#,0.00
+		lineageTag: 9h8d6h4h-1f2h-6h0h-2d3d-1f2h6h0h2d3d
+
+	column 'Boosted Post'
+		dataType: string
+		lineageTag: b33752ee-3a8e-41df-8495-f201264fb210
+		summarizeBy: none
+		sourceColumn: Boosted Post
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Campaign Id'
+		dataType: string
+		lineageTag: 0bdbdaea-4533-4055-8f84-95401d549975
+		summarizeBy: none
+		sourceColumn: Campaign Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Campaign Name'
+		dataType: string
+		lineageTag: 1221a23d-4f2c-412f-bd1f-bf1daafe718a
+		summarizeBy: none
+		sourceColumn: Campaign Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Content Theme'
+		dataType: string
+		lineageTag: dde8fc00-1353-471d-89a8-bd6f1229434f
+		summarizeBy: none
+		sourceColumn: Content Theme
+
+		annotation SummarizationSetBy = Automatic
+
+	column Platform
+		dataType: string
+		lineageTag: 1c0d6031-84a4-4bc0-b177-24e380ee2151
+		summarizeBy: none
+		sourceColumn: Platform
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Post Date'
+		dataType: dateTime
+		formatString: yyyy"年"m"月"
+		lineageTag: 52add29c-b46c-40a1-995e-9c9643d3cdb6
+		summarizeBy: none
+		sourceColumn: Post Date
+
+		variation 变体
+			isDefault
+			relationship: ee14fcbc-0c32-4707-9fde-d40bf3a286a6
+			defaultHierarchy: LocalDateTable_81667757-c6d5-42f6-8550-dc85e75236cc.日期层次结构
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Post Time'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 91755e8d-1996-4cae-8de2-122dea4f0917
+		summarizeBy: none
+		sourceColumn: Post Time
+
+		variation 变体
+			isDefault
+			relationship: 06ba66ef-d99e-4a32-a6bb-d2e024777de4
+			defaultHierarchy: LocalDateTable_50882b3c-dc79-4a35-8bed-0a625d16dc8b.日期层次结构
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Post Type'
+		dataType: string
+		lineageTag: cd4f0e8c-3465-477d-83ee-0762be17273f
+		summarizeBy: none
+		sourceColumn: Post Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target Audience'
+		dataType: string
+		lineageTag: 0f2bcd41-8562-42e5-a8dc-feeab21672e6
+		summarizeBy: none
+		sourceColumn: Target Audience
+
+		annotation SummarizationSetBy = Automatic
+
+	column Clicks
+		dataType: int64
+		formatString: 0
+		lineageTag: 73659f11-67ba-4191-940a-ef9abc8d104e
+		summarizeBy: sum
+		sourceColumn: Clicks
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Conversion Value Usd'
+		dataType: double
+		lineageTag: 9d0078d8-f818-4fdb-9e1b-ba38fab4ad38
+		summarizeBy: sum
+		sourceColumn: Conversion Value Usd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Conversions
+		dataType: int64
+		formatString: 0
+		lineageTag: dec011b1-c3cd-4272-997a-dec34dc14128
+		summarizeBy: sum
+		sourceColumn: Conversions
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cpc Usd'
+		dataType: double
+		lineageTag: 45b9539a-0336-4154-8cac-855f25d87a34
+		summarizeBy: sum
+		sourceColumn: Cpc Usd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Ctr
+		dataType: double
+		lineageTag: 03200cc8-b8ff-4a22-854e-04244a6b335f
+		summarizeBy: sum
+		sourceColumn: Ctr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Emoji Count'
+		dataType: int64
+		formatString: 0
+		lineageTag: 36098b8c-a9bc-4943-8b44-58a311b5b915
+		summarizeBy: sum
+		sourceColumn: Emoji Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Engagement Rate'
+		dataType: double
+		lineageTag: aa55e127-a62a-4794-8e7e-052f938fbed3
+		summarizeBy: sum
+		sourceColumn: Engagement Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Engagements
+		dataType: int64
+		formatString: 0
+		lineageTag: 9e7ca148-362f-4928-9076-b6c98476973b
+		summarizeBy: sum
+		sourceColumn: Engagements
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Hashtag Count'
+		dataType: int64
+		formatString: 0
+		lineageTag: 23c8a1d4-dce4-4e4e-b30d-36a86c882c71
+		summarizeBy: sum
+		sourceColumn: Hashtag Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column Impressions
+		dataType: int64
+		formatString: 0
+		lineageTag: 61a54baf-a1e3-48d9-a5cc-b39b0500e0b1
+		summarizeBy: sum
+		sourceColumn: Impressions
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reach
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b3854c0-60ba-4be8-9bf8-de5726b87240
+		summarizeBy: sum
+		sourceColumn: Reach
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sentiment Score'
+		dataType: double
+		lineageTag: a3db057f-97e2-4a55-8ea9-938600500213
+		summarizeBy: sum
+		sourceColumn: Sentiment Score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Spend Usd'
+		dataType: double
+		lineageTag: ec3879da-7d72-4c6a-8212-91d643c3f991
+		summarizeBy: sum
+		sourceColumn: Spend Usd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Video Length Seconds'
+		dataType: int64
+		formatString: 0
+		lineageTag: e7ecd690-9890-4320-94f3-2caa4b1b839f
+		summarizeBy: sum
+		sourceColumn: Video Length Seconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Word Count'
+		dataType: int64
+		formatString: 0
+		lineageTag: bcdc6435-3dd2-4a39-a0cf-1ec511d05b6a
+		summarizeBy: sum
+		sourceColumn: Word Count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fitcheck OVERVIEW' = m
+		mode: import
+		source =
+				let
+				    源 = Csv.Document(File.Contents("C:\Users\imgwho\Desktop\临时\20251017 twb2pbi\pbi sample\Fitcheck OVERVIEW.csv"),[Delimiter=",", Columns=24, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    提升的标题 = Table.PromoteHeaders(源, [PromoteAllScalars=true]),
+				    更改的类型 = Table.TransformColumnTypes(提升的标题,{{"Boosted Post", type text}, {"Campaign Id", type text}, {"Campaign Name", type text}, {"Content Theme", type text}, {"Platform", type text}, {"Post Date", type date}, {"Post Time", type datetime}, {"Post Type", type text}, {"Target Audience", type text}, {"Clicks", Int64.Type}, {"Conversion Value Usd", type number}, {"Conversions", Int64.Type}, {"Cpc Usd", type number}, {"Ctr", type number}, {"Emoji Count", Int64.Type}, {"Engagement Rate", type number}, {"Engagements", Int64.Type}, {"Hashtag Count", Int64.Type}, {"Impressions", Int64.Type}, {"Reach", Int64.Type}, {"Sentiment Score", type number}, {"Spend Usd", type number}, {"Video Length Seconds", Int64.Type}, {"Word Count", Int64.Type}})
+				in
+				    更改的类型
+
+	annotation PBI_ResultType = Table
+

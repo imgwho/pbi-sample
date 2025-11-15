@@ -1,0 +1,21 @@
+model Model
+	culture: zh-CN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: zh-CN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Fitcheck OVERVIEW"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'Fitcheck OVERVIEW'
+ref table DateTableTemplate_cd61e69d-af85-4c1f-9e5f-e78644052133
+ref table LocalDateTable_81667757-c6d5-42f6-8550-dc85e75236cc
+ref table LocalDateTable_50882b3c-dc79-4a35-8bed-0a625d16dc8b
+
+ref cultureInfo zh-CN
+
